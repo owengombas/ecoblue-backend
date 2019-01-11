@@ -1,5 +1,6 @@
 import { IFetcherParams } from '../type'
 import Axios from 'axios'
+import { Agent } from 'https'
 
 export class HttpRequest {
   private _url: string
@@ -79,6 +80,9 @@ export class HttpRequest {
     const res = await Axios(this.Url, {
       method: this.Method,
       data: this.Data,
+      httpsAgent: new Agent({
+        rejectUnauthorized: false
+      }),
       headers: {
         'Content-Type': this.ContentType,
         'Cookie': this.FlatCookies,
