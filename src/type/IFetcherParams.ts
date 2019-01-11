@@ -4,6 +4,6 @@ export interface IFetcherParams {
   contentType?: string
   cookies?: Map<string, string>
   interval?: number,
-  header?: Object,
+  headers?: Object,
   data?: any
 }

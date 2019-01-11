@@ -9,9 +9,12 @@ export function nextThinkRequest() {
     url: 'https://s2lnxtportal2.s2.rpn.ch/PortalServlet?',
     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
     method: 'post',
+    headers: {
+      'x-auth-token': 'PaGLC8/gdIhoiAPUJ5gMhzb0TBfBk2VZEOfrpfBIZt0='
+    },
     cookies: new Map([
       ['NEXThinkPortal-Locale', 'en_CH'],
-      ['NEXThinkPortal-Session-ID', '7f2d56ceb57d72f2496ca098970bed0b']
+      ['NEXThinkPortal-Session-ID', 'aa9b3ca5167fe1df10994b6e7ba6b7a2']
     ]),
     data: Querystring.stringify({
       query: 'getKPIWidgetData',

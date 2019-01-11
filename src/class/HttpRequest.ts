@@ -69,7 +69,7 @@ export class HttpRequest {
     this.ContentType = params.contentType
     this.Url = params.url
     this.Method = params.method
-    this.Headers = params.header
+    this.Headers = params.headers
   }
 
   /**
