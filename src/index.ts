@@ -1,4 +1,5 @@
-import { Fetcher, Persister } from './class'
+import { Fetcher, Persister, HttpRequest } from './class'
+import { nextThinkRequest } from './constants/Requests'
 
 export class Main {
   private static _instance: Main
@@ -19,10 +20,7 @@ export class Main {
 }
 
 Main.Start(
-  new Fetcher({
-    baseUrl: 'http://api.readsan.com/api/manga',
-    contentType: 'application/json',
-    method: 'get'
-  })
+  new Fetcher([
+    nextThinkRequest()
+  ], 0.09)
 )
-

@@ -1,7 +1,9 @@
 export interface IFetcherParams {
-  baseUrl?: string
+  url?: string
   method?: string
   contentType?: string
   cookies?: Map<string, string>
-  interval?: number
+  interval?: number,
+  header?: Object,
+  data?: any
 }
