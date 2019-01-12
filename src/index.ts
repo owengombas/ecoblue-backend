@@ -1,5 +1,5 @@
 import { Fetcher, Persister, HttpRequest } from './class'
-import { nextThinkRequest } from './constants/Requests'
+import { nextThinkRequest } from './constant/Requests'
 
 export class Main {
   private static _instance: Main
