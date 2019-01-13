@@ -1,5 +1,6 @@
-import { Fetcher, Persister, HttpRequest } from './class'
+import { Fetcher, Persister, HttpRequest, Datacenter } from './class'
 import { nextThinkRequest } from './constant/Requests'
+import { writeFile } from 'fs'
 
 export class Main {
   private static _instance: Main
@@ -19,8 +20,11 @@ export class Main {
   }
 }
 
-Main.Start(
-  new Fetcher([
-    nextThinkRequest()
-  ], 0.09)
-)
+// Main.Start(
+//   new Fetcher([
+//     nextThinkRequest()
+//   ], 0.09)
+// )
+
+Datacenter.probHour()
+Datacenter.probReccurence()
