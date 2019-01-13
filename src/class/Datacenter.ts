@@ -18,11 +18,6 @@ export class Datacenter {
 
   public static probHour(write: boolean = false) {
     const out: IProbHour[] = []
-    const defaultEnergy = {
-      kavh: [],
-      kwh: [],
-      kvarh: []
-    }
 
     dataCenterHour.map((weekDay, dayIndex) => {
       out.push({
