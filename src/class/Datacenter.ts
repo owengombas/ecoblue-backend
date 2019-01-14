@@ -63,7 +63,7 @@ export class Datacenter {
     const out: IProbReccurence[] = []
     let lastNumber: number
 
-    dataCenterHour.map((weekDay, dayIndex) => {
+    dataCenterDay.map((weekDay, dayIndex) => {
       out.push({
         kavh: new Map(),
         kwh: new Map(),

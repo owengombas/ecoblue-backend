@@ -26,5 +26,5 @@ export class Main {
 //   ], 0.09)
 // )
 
-// Datacenter.probHour()
-Datacenter.probReccurence(true)
+Datacenter.probHour()
+Datacenter.probReccurence()
