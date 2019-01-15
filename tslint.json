@@ -11,7 +11,7 @@
     "prefer-array-literal": true,
     "quotemark": [
       true,
-      "single",
+      "double",
       "avoid-escape",
       "avoid-template",
       "jsx-double"
@@ -102,10 +102,7 @@
       true,
       "always"
     ],
-    "max-line-length": [
-      true,
-      150
-    ],
+    "max-line-length": false,
     "block-spacing": true,
     "ter-computed-property-spacing": true,
     "ter-func-call-spacing": true,
@@ -120,7 +117,7 @@
       }
     ],
     "semicolon": [
-      false,
+      true,
       "always"
     ],
     "no-construct": true,

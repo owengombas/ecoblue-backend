@@ -11,7 +11,14 @@
       "dom",
       "es7",
       "esnext.asynciterable"
-    ]
+    ],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@type": ["src/type/index"],
+      "@class": ["src/class/index"],
+      "@constant": ["src/constant/index"]
+    }
   },
   "exclude": [
     "node_modules"

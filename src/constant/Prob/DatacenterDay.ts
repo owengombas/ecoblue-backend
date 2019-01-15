@@ -1,4 +1,4 @@
-import { IDatacenter } from '../type'
+import { IDatacenter } from "@type";
 
 export const dataCenterDay: IDatacenter[] = [{
     kavh: [
@@ -1494,4 +1494,4 @@ export const dataCenterDay: IDatacenter[] = [{
       [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]
     ]
   }
-]
+];

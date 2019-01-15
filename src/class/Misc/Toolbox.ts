@@ -4,6 +4,6 @@ export class Toolbox {
    * @param minute The number of minutes
    */
   static getMinute(minute: number) {
-    return 1000 * 60 * minute
+    return 1000 * 60 * minute;
   }
 }
