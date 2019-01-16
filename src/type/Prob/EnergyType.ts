@@ -1,1 +1,1 @@
-export type EnergyType = "kavh" | "kwh" | "kvarh";
+export type EnergyType = "kvah" | "kwh" | "kvarh";

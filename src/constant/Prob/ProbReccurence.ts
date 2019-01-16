@@ -1,5 +1,5 @@
 export const probReccurence = [{
-  kavh: {
+  kvah: {
     0: {
       0: {
         number: 12,
@@ -162,7 +162,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     0: {
       0: {
         number: 25,
@@ -321,7 +321,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     1: {
       2: {
         number: 139,
@@ -452,7 +452,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     1: {
       2: {
         number: 137,
@@ -583,7 +583,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     1: {
       2: {
         number: 122,
@@ -698,7 +698,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     1: {
       2: {
         number: 107,
@@ -813,7 +813,7 @@ export const probReccurence = [{
     }
   }
 }, {
-  kavh: {
+  kvah: {
     1: {
       2: {
         number: 106,

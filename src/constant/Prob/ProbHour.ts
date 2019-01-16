@@ -1,5 +1,5 @@
 export const probHour = [{
-  kavh: [{
+  kvah: [{
     1: {
       number: 2,
       frequency: 0.028985507246376812
@@ -3803,7 +3803,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     0: {
       number: 1,
       frequency: 0.014492753623188406
@@ -7727,7 +7727,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     1: {
       number: 3,
       frequency: 0.043478260869565216
@@ -11431,7 +11431,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     1: {
       number: 2,
       frequency: 0.029411764705882353
@@ -15079,7 +15079,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     1: {
       number: 1,
       frequency: 0.014705882352941176
@@ -18699,7 +18699,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     1: {
       number: 1,
       frequency: 0.014705882352941176
@@ -22247,7 +22247,7 @@ export const probHour = [{
     }
   }]
 }, {
-  kavh: [{
+  kvah: [{
     1: {
       number: 2,
       frequency: 0.029411764705882353

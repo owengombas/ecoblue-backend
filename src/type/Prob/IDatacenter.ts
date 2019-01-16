@@ -1,5 +1,5 @@
 export interface IDatacenter {
-  kavh: number[][];
+  kvah: number[][];
   kwh: number[][];
   kvarh: number[][];
 }

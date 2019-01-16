@@ -3,7 +3,7 @@ import { IProb } from "@type";
 export type ProbHourTable = Map<number, IProb>;
 
 export interface IProbHour {
-  kavh: ProbHourTable[];
+  kvah: ProbHourTable[];
   kwh: ProbHourTable[];
   kvarh: ProbHourTable[];
 }
