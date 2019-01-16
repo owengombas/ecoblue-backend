@@ -12,16 +12,16 @@ export class FunctionGenerator {
       const dayIndex = dayNumber - 1;
       const dayProb = probHour[dayIndex];
       const out: IProbFunction = {
-        kvah: [], // TODO: Computed
+        kvah: [],
         kwh: [],
         kvarh: []
       };
-      const realEnergy: EnergyType[] = ['kvarh', 'kwh'];
+      const realEnergy: EnergyType[] = ["kvarh", "kwh"];
 
       for (let hour = 0; hour < FunctionGenerator.unitPerDay; hour++) {
         realEnergy.map((energyType: EnergyType) => {
           const energyOut = out[energyType];
-          const energyHourProb = dayProb[energyType][hour]
+          const energyHourProb = dayProb[energyType][hour];
 
           let flatProbs: IProbInfos[] = Object.keys(energyHourProb).map((key): IProbInfos => {
             const hourProbs: IProb = energyHourProb[key];
@@ -33,7 +33,7 @@ export class FunctionGenerator {
               ...hourProbs
             };
           });
-  
+
           const lastOut = energyOut[energyOut.length - 1];
           if (lastOut > 0) {
             const reccurenceProbs = probReccurence[dayIndex][energyType][lastOut];
@@ -51,7 +51,7 @@ export class FunctionGenerator {
               return prob;
             });
           }
-  
+
           const random = Math.random();
           let increment = 0;
           for (const prob of flatProbs) {
@@ -61,12 +61,11 @@ export class FunctionGenerator {
               break;
             }
           }
-
-        })
+        });
       }
 
       // Calculate kVAh
-      for(let i = 0; i <= this.unitPerDay; i++) {
+      for (let i = 0; i <= this.unitPerDay; i++) {
         out.kvah.push(Math.sqrt(Math.pow(out.kvarh[i], 2) + Math.pow(out.kwh[i], 2)));
       }
 
