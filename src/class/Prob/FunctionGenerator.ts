@@ -1,7 +1,6 @@
 import { probHour, probReccurence } from "@constant";
 import { IProbInfos, IProb, EnergyType, IProbFunction } from "@type";
 
-// TO OPTIMIZE
 export class FunctionGenerator {
   // 15 is the interval (minute)
   private static readonly unitPerDay = 24 * 60 / 15;
