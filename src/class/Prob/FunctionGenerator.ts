@@ -6,6 +6,36 @@ export class FunctionGenerator {
   private static readonly unitPerDay = 24 * 60 / 15;
   private static readonly reccurenceWeight = 1 / 50;
 
+  static get HourIndex() {
+    const now = new Date();
+    const midnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0, 0, 0
+    );
+    return Math.floor(((new Date()).getTime() - midnight.getTime()) / 1000 / 60 / 15);
+  }
+
+  static get TimeToMidnight() {
+    const now = new Date();
+    const nextMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1,
+      0, 0, 0
+    );
+    return nextMidnight.getTime() - now.getTime();
+  }
+
+  static get Day() {
+    return (new Date()).getDay();
+  }
+
+  static get Time() {
+    return (new Date()).getTime();
+  }
+
   static generateDay(dayNumber: number) {
     if (dayNumber >= 1 && dayNumber <= 7) {
       const dayIndex = dayNumber - 1;
@@ -68,7 +98,7 @@ export class FunctionGenerator {
         out.kvah.push(Math.sqrt(Math.pow(out.kvarh[i], 2) + Math.pow(out.kwh[i], 2)));
       }
 
-      console.log(out);
+      return out;
     } else {
       throw new Error("Need a dayNumber between 1 and 7");
     }

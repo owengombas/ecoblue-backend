@@ -9,6 +9,10 @@
       "as-needed"
     ],
     "prefer-array-literal": true,
+    "member-access": [
+      true,
+      "no-public"
+    ],
     "quotemark": [
       true,
       "double",
@@ -28,7 +32,7 @@
     ],
     "no-parameter-reassignment": true,
     "align": [
-      true,
+      false,
       "arguments",
       "parameters"
     ],

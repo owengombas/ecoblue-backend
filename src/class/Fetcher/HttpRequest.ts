@@ -10,52 +10,52 @@ export class HttpRequest {
   private _data: any;
   private _headers: Object;
 
-  public get Data() {
+  get Data() {
     return this._data;
   }
-  public set Data(data) {
+  set Data(data) {
     this._data = data;
   }
 
-  public get Url() {
+  get Url() {
     return this._url;
   }
-  public set Url(url) {
+  set Url(url) {
     this._url = url;
   }
 
-  public get Method() {
+  get Method() {
     return this._method;
   }
-  public set Method(method) {
+  set Method(method) {
     this._method = method;
   }
 
-  public get ContentType() {
+  get ContentType() {
     return this._contentType;
   }
-  public set ContentType(contentType) {
+  set ContentType(contentType) {
     this._contentType = contentType;
   }
 
-  public get Cookies() {
+  get Cookies() {
     return this._cookies;
   }
-  public set Cookies(val) {
+  set Cookies(val) {
     this._cookies = val;
   }
 
-  public get Headers() {
+  get Headers() {
     return this._headers;
   }
-  public set Headers(headers) {
+  set Headers(headers) {
     this._headers = headers;
   }
 
   /**
    * Flat the cookies to put it into the headers
    */
-  public get FlatCookies() {
+  get FlatCookies() {
     if (this._cookies) {
       return Array.from(this._cookies).reduce((prev: string, curr: string[], index: number) => {
         return `${prev}${index > 0 ? ";" : ""}${curr[0]}=${curr[1]}`;
@@ -64,7 +64,7 @@ export class HttpRequest {
     return "";
   }
 
-  public constructor(params: IFetcherParams) {
+  constructor(params: IFetcherParams) {
     this.Data = params.data;
     this.Cookies = params.cookies;
     this.ContentType = params.contentType;
@@ -76,7 +76,7 @@ export class HttpRequest {
   /**
    * Execute the HTTP request
    */
-  public async execute() {
+  async execute() {
     const res = await Axios(this.Url, {
       method: this.Method,
       data: this.Data,

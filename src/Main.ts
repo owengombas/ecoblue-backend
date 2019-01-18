@@ -1,24 +1,30 @@
-import { Fetcher, Persister } from "@class";
+import { Fetcher, Persister, FunctionGenerator } from "@class";
 import { nextThinkRequest } from "@constant";
-import { FunctionGenerator } from "./class/Prob/FunctionGenerator";
+import { IProbFunction } from "@type";
 
 export class Main {
   private static _instance: Main;
+  private _currentDay: IProbFunction;
+  private _nextDay: IProbFunction;
 
-  public static get Instance() {
+  static get Instance() {
     if (this._instance) {
       this._instance = new Main();
     }
     return this._instance;
   }
 
-  public static Start(...fetchers: Fetcher[]) {
+  static Start(...fetchers: Fetcher[]) {
     fetchers.map((f) => {
       f.start();
       f.FetchSubject.subscribe(Persister.persist);
     });
+    console.log(FunctionGenerator.generateDay(1));
+    console.log((new Date).getDay());
+    setTimeout(() => {
+
+    }, FunctionGenerator.TimeToMidnight);
   }
 }
-
-FunctionGenerator.generateDay(1);
+console.log(FunctionGenerator.HourIndex);
 Main.Start();

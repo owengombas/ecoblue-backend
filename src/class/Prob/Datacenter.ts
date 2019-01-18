@@ -3,9 +3,9 @@ import { dataCenterDay, dataCenterHour } from "@constant";
 import { Persister } from "@class";
 
 export class Datacenter {
-  public static get DatacenterHourFromDay(): IDatacenter[] {
+  static get DatacenterHourFromDay(): IDatacenter[] {
     return dataCenterDay.map((weekDays) => ({
-      kavh: this.reverse2dArray(weekDays.kavh),
+      kvah: this.reverse2dArray(weekDays.kvah),
       kwh: this.reverse2dArray(weekDays.kwh),
       kvarh: this.reverse2dArray(weekDays.kvarh)
     }));
@@ -16,12 +16,12 @@ export class Datacenter {
     frequency: -1
   };
 
-  public static probHour(write: boolean = false) {
+  static probHour(write: boolean = false) {
     const out: IProbHour[] = [];
 
     dataCenterHour.map((weekDay, dayIndex) => {
       out.push({
-        kavh: [],
+        kvah: [],
         kwh: [],
         kvarh: []
       });
@@ -45,7 +45,7 @@ export class Datacenter {
       const toObject = [];
       out.map((weekDay, dayIndex) => {
         toObject.push({
-          kavh: [],
+          kvah: [],
           kwh: [],
           kvarh: []
         });
@@ -59,13 +59,13 @@ export class Datacenter {
     return out;
   }
 
-  public static probReccurence(write = false) {
+  static probReccurence(write = false) {
     const out: IProbReccurence[] = [];
     let lastNumber: number;
 
     dataCenterDay.map((weekDay, dayIndex) => {
       out.push({
-        kavh: new Map(),
+        kvah: new Map(),
         kwh: new Map(),
         kvarh: new Map()
       });
@@ -107,7 +107,7 @@ export class Datacenter {
       const toObject = [];
       out.map((weekDay, dayIndex) => {
         toObject.push({
-          kavh: new Map(),
+          kvah: new Map(),
           kwh: new Map(),
           kvarh: new Map()
         });
