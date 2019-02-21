@@ -12,13 +12,7 @@
       "es7",
       "esnext.asynciterable"
     ],
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@type": ["src/type/index"],
-      "@class": ["src/class/index"],
-      "@constant": ["src/constant/index"]
-    }
+    "moduleResolution": "node"
   },
   "exclude": [
     "node_modules"

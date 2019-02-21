@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { HttpRequest } from "@class";
+import { HttpRequest } from "../../class";
 
 /**
  * Get the Nexthink request

@@ -1,6 +1,7 @@
-import { Fetcher, Persister, FunctionGenerator } from "@class";
-import { nextThinkRequest } from "@constant";
-import { IProbFunction } from "@type";
+import { Fetcher, Persister, FunctionGenerator } from "./class";
+import { nextThinkRequest } from "./constant";
+import { IProbFunction } from "./type";
+import { Rakkit } from "rakkit";
 
 export class Main {
   private static _instance: Main;
@@ -15,12 +16,17 @@ export class Main {
   }
 
   static Start(...fetchers: Fetcher[]) {
+    console.log(`${__dirname}/api/`);
+    Rakkit.start({
+      websockets: [`${__dirname}/api/**/*.ws.ts`],
+      routers: [`${__dirname}/api/**/*.router.ts`]
+    });
     fetchers.map((f) => {
       f.start();
       f.FetchSubject.subscribe(Persister.persist);
     });
-    console.log(FunctionGenerator.generateDay(1));
-    console.log((new Date).getDay());
+    // console.log(FunctionGenerator.generateDay(1));
+    // console.log((new Date).getDay());
     setTimeout(() => {
 
     }, FunctionGenerator.TimeToMidnight);

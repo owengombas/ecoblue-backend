@@ -1,5 +1,5 @@
-import { probHour, probReccurence } from "@constant";
-import { IProbInfos, IProb, EnergyType, IProbFunction } from "@type";
+import { IProbInfos, IProb, EnergyType, IProbFunction } from "../../type";
+import { probHour, probReccurence } from "../../constant";
 
 export class FunctionGenerator {
   // 15 is the interval (minute)

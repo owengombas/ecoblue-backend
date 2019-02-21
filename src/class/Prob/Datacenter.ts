@@ -1,6 +1,6 @@
-import { IProb, IDatacenter, IProbHour, IProbReccurence, ProbHourTable, ProbReccurenceTable } from "@type";
-import { dataCenterDay, dataCenterHour } from "@constant";
-import { Persister } from "@class";
+import { IProb, IDatacenter, IProbHour, IProbReccurence, ProbHourTable, ProbReccurenceTable } from "../../type";
+import { dataCenterDay, dataCenterHour } from "../../constant";
+import { Persister } from "..";
 
 export class Datacenter {
   static get DatacenterHourFromDay(): IDatacenter[] {

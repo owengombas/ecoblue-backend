@@ -1,4 +1,4 @@
-import { IDatacenter } from "@type";
+import { IDatacenter } from "../../type";
 
 export const dataCenterDay: IDatacenter[] = [{
     kvah: [

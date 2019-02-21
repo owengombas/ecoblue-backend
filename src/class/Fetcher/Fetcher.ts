@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { Toolbox, HttpRequest } from "@class";
+import { Toolbox, HttpRequest } from "..";
 
 export class Fetcher {
   private _requests: HttpRequest[];
