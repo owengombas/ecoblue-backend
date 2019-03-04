@@ -4,15 +4,39 @@
     "no-var-keyword": true,
     "object-literal-shorthand": true,
     "object-shorthand-properties-first": true,
+    "unified-signatures": false,
+    "adjacent-overload-signatures": true,
+    "member-access": [true, "no-public"],
+    "no-empty": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "public-instance-field",
+          "protected-static-field",
+          "protected-instance-field",
+          "private-static-field",
+          "private-instance-field",
+
+          "public-constructor",
+          "private-constructor",
+          "protected-constructor",
+
+          "public-static-method",
+          "public-instance-method",
+          "private-static-method",
+          "private-instance-method",
+          "protected-static-method",
+          "protected-instance-method"
+        ]
+      }
+    ],
     "object-literal-key-quotes": [
       true,
       "as-needed"
     ],
     "prefer-array-literal": true,
-    "member-access": [
-      true,
-      "no-public"
-    ],
     "quotemark": [
       true,
       "double",
@@ -31,11 +55,6 @@
       }
     ],
     "no-parameter-reassignment": true,
-    "align": [
-      false,
-      "arguments",
-      "parameters"
-    ],
     "ter-prefer-arrow-callback": [
       true
     ],
@@ -106,12 +125,30 @@
       true,
       "always"
     ],
-    "max-line-length": false,
-    "block-spacing": true,
-    "ter-computed-property-spacing": true,
-    "ter-func-call-spacing": true,
-    "no-trailing-whitespace": true,
-    "no-consecutive-blank-lines": true,
+    "max-line-length": [
+      true,
+      150
+    ],
+    "block-spacing": [
+      true,
+      "always"
+    ],
+    "ter-computed-property-spacing": [
+      true,
+      "always"
+    ],
+    "ter-func-call-spacing": [
+      true,
+      "always"
+    ],
+    "no-trailing-whitespace": [
+      true,
+      "always"
+    ],
+    "no-consecutive-blank-lines": [
+      true,
+      "always"
+    ],
     "trailing-comma": [
       true,
       {

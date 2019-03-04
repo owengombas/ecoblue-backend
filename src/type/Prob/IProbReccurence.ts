@@ -1,4 +1,4 @@
-import { IProb } from "@type";
+import { IProb } from "..";
 
 export type ProbReccurenceTable = Map<number, Map<number, IProb>>;
 

@@ -1,6 +1,6 @@
 import { Agent } from "https";
 import Axios from "axios";
-import { IFetcherParams } from "@type";
+import { IFetcherParams } from "../../type";
 
 export class HttpRequest {
   private _url: string;

@@ -1,5 +1,6 @@
-import { IDatacenter } from "@type";
+import { IDatacenter } from "../../type";
 
+/* tslint:disable */
 export const dataCenterHour: IDatacenter[] = [{
   kvah: [
     [2, 1, 1, 2, 2, 3, 2, 2, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 3, 3, 2, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2],

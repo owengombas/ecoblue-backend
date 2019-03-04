@@ -1,11 +1,9 @@
-import { Fetcher, Persister, FunctionGenerator } from "@class";
-import { nextThinkRequest } from "@constant";
-import { IProbFunction } from "@type";
+import * as BodyParder from "koa-bodyparser";
+import { Rakkit, MetadataStorage } from "rakkit";
+import { ProbGeneratorService } from "./api/services/ProbGeneratorService";
 
 export class Main {
   private static _instance: Main;
-  private _currentDay: IProbFunction;
-  private _nextDay: IProbFunction;
 
   static get Instance() {
     if (this._instance) {
@@ -14,17 +12,17 @@ export class Main {
     return this._instance;
   }
 
-  static Start(...fetchers: Fetcher[]) {
-    fetchers.map((f) => {
-      f.start();
-      f.FetchSubject.subscribe(Persister.persist);
+  static async Start() {
+    await Rakkit.start({
+      globalRestMiddlewares: [
+        BodyParder()
+      ],
+      routers: [
+        `${__dirname}/api/routers/*Router.ts`
+      ]
     });
-    console.log(FunctionGenerator.generateDay(1));
-    console.log((new Date).getDay());
-    setTimeout(() => {
-
-    }, FunctionGenerator.TimeToMidnight);
+    MetadataStorage.getService(ProbGeneratorService).Start();
   }
 }
-console.log(FunctionGenerator.HourIndex);
+
 Main.Start();

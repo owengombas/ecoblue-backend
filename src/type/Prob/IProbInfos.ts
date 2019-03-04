@@ -1,4 +1,4 @@
-import { IProb, EnergyType } from "@type";
+import { IProb, EnergyType } from "..";
 
 export interface IProbInfos extends IProb {
   value: number;

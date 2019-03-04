@@ -7,3 +7,6 @@ export * from "./Prob/IProbFunction";
 export * from "./Prob/IProbHour";
 export * from "./Prob/IProbInfos";
 export * from "./Prob/IProbReccurence";
+export * from "./Prob/IProbTotal";
+export * from "./Prob/IComputedProb";
+export * from "./Prob/IComputedFunction";

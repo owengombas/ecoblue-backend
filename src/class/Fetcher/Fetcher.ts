@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { Toolbox, HttpRequest } from "@class";
+import { Toolbox, HttpRequest } from "..";
 
 export class Fetcher {
   private _requests: HttpRequest[];
@@ -7,24 +7,28 @@ export class Fetcher {
   private _interval: number = 1;
   private _fetchSubject: Subject<Object> = new Subject();
 
-  public get FetchSubject() {
+  get FetchSubject() {
     return this._fetchSubject;
   }
 
-  public constructor(requests: HttpRequest[])
-  public constructor(requests: HttpRequest[], interval: number)
-  public constructor(requests: HttpRequest[], interval?: number) {
+  constructor(requests: HttpRequest[])
+  constructor(requests: HttpRequest[], interval: number)
+  constructor(requests: HttpRequest[], interval?: number) {
     this._requests = requests;
     if (this._interval) {
       this._interval = interval;
     }
   }
 
-  public start() {
+  start() {
     this._timer = setTimeout(
       this.execute.bind(this),
       Toolbox.getMinute(this._interval)
     );
+  }
+
+  stop() {
+    clearTimeout(this._timer);
   }
 
   private async execute() {
@@ -41,9 +45,5 @@ export class Fetcher {
       });
     }
     this.start();
-  }
-
-  public stop() {
-    clearTimeout(this._timer);
   }
 }
