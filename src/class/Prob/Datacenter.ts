@@ -1,5 +1,4 @@
 import { dataCenterDay, dataCenterHour } from "../../constant";
-import { Persister } from "../../class";
 import {
   IProb,
   IDatacenter,
@@ -60,7 +59,6 @@ export class Datacenter {
           toObject[dayIndex][key] = weekDay[key].map((a) => this.mapToObject(a));
         });
       });
-      Persister.saveFile("probHour.json", JSON.stringify(toObject));
     }
 
     return out;
@@ -122,7 +120,6 @@ export class Datacenter {
           toObject[dayIndex][key] = this.mapToObject(weekDay[key]);
         });
       });
-      Persister.saveFile("probReccurence.json", JSON.stringify(toObject));
     }
 
     return out;

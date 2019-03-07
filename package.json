@@ -12,7 +12,8 @@
     "axios": "^0.18.0",
     "koa-bodyparser": "^4.2.1",
     "rakkit": "^0.1.11",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "typeorm": "^0.2.14"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

@@ -10,11 +10,11 @@ export function nextThinkRequest() {
     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     method: "post",
     headers: {
-      "x-auth-token": "PaGLC8/gdIhoiAPUJ5gMhzb0TBfBk2VZEOfrpfBIZt0="
+      "x-auth-token": "peUt5kmpLe7763sTNgXSKTb0TBfBk2VZEOfrpfBIZt0="
     },
     cookies: new Map([
       ["NEXThinkPortal-Locale", "en_CH"],
-      ["NEXThinkPortal-Session-ID", "aa9b3ca5167fe1df10994b6e7ba6b7a2"]
+      ["NEXThinkPortal-Session-ID", "d83670fe36992cfbacc7f0920515ad5e"]
     ]),
     data: stringify({
       query: "getKPIWidgetData",

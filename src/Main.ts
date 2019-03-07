@@ -1,6 +1,7 @@
 import * as BodyParder from "koa-bodyparser";
 import { Rakkit, MetadataStorage } from "rakkit";
-import { ProbGeneratorService } from "./api/services/ProbGeneratorService";
+import { ProbGeneratorService, FetcherService } from "./services";
+import { nextThinkRequest } from "./constant";
 
 export class Main {
   private static _instance: Main;
@@ -18,10 +19,11 @@ export class Main {
         BodyParder()
       ],
       routers: [
-        `${__dirname}/api/routers/*Router.ts`
+        `${__dirname}/routers/*Router.ts`
       ]
     });
     MetadataStorage.getService(ProbGeneratorService).Start();
+    MetadataStorage.getService(FetcherService).Start(nextThinkRequest());
   }
 }
 

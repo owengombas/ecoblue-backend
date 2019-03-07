@@ -1,34 +1,32 @@
+import { Service } from "rakkit";
 import { Subject } from "rxjs";
-import { Toolbox, HttpRequest } from "..";
+import { HttpRequest, Timing } from "../class";
 
-export class Fetcher {
+@Service()
+export class FetcherService {
   private _requests: HttpRequest[];
   private _timer: NodeJS.Timeout;
-  private _interval: number = 1;
   private _fetchSubject: Subject<Object> = new Subject();
 
   get FetchSubject() {
     return this._fetchSubject;
   }
 
-  constructor(requests: HttpRequest[])
-  constructor(requests: HttpRequest[], interval: number)
-  constructor(requests: HttpRequest[], interval?: number) {
+  Start(...requests: HttpRequest[]) {
     this._requests = requests;
-    if (this._interval) {
-      this._interval = interval;
-    }
+    this.launchUpdate();
   }
 
-  start() {
+  Stop() {
+    clearTimeout(this._timer);
+  }
+
+  private launchUpdate() {
+    console.log("Update in: ", Timing.convertToMinutes(Timing.NextTimeRange));
     this._timer = setTimeout(
       this.execute.bind(this),
-      Toolbox.getMinute(this._interval)
+      Timing.NextTimeRange
     );
-  }
-
-  stop() {
-    clearTimeout(this._timer);
   }
 
   private async execute() {
@@ -36,6 +34,7 @@ export class Fetcher {
       const res = await Promise.all(
         this._requests.map((request) => request.execute())
       );
+      console.log("a", res);
       this._fetchSubject.next(res);
     } catch (err) {
       console.log(err);
@@ -44,6 +43,6 @@ export class Fetcher {
         datas: this._requests.map((request) => request.Url)
       });
     }
-    this.start();
+    this.launchUpdate();
   }
 }

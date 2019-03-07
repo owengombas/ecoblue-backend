@@ -7,13 +7,13 @@ import {
   IProbTotal,
   IComputedProb,
   IComputedFunction
-} from "../../type";
-import { probHour, probReccurence } from "../../constant";
+} from "../type";
+import { probHour, probReccurence } from "../constant";
+import { Timing } from "../class";
 
 @Service()
 export class ProbGeneratorService {
   private readonly _reccurenceWeight = 1 / 50;
-  private readonly _unitPerDay = 24 * 60 / 15;
   private _generatedToday: IProbFunction;
   private _totalGenerated: IProbTotal;
 
@@ -25,32 +25,6 @@ export class ProbGeneratorService {
     };
   }
 
-  private get _currentDayIndex() {
-    return (new Date()).getDay();
-  }
-
-  private get _currentTimeRangeIndex() {
-    const now = new Date();
-    const midnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      0, 0, 0
-    );
-    return Math.floor(((new Date()).getTime() - midnight.getTime()) / 1000 / 60 / 15);
-  }
-
-  private get _timeToReachMidnight() {
-    const now = new Date();
-    const nextMidnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() + 1,
-      0, 0, 0
-    );
-    return nextMidnight.getTime() - now.getTime();
-  }
-
   constructor() {
     this._totalGenerated = {
       kvah: 0,
@@ -60,11 +34,11 @@ export class ProbGeneratorService {
   }
 
   Start() {
-    this._generatedToday = this.GenerateDay(this._currentDayIndex);
+    this._generatedToday = this.GenerateDay(Timing.CurrentDayIndex);
     setTimeout(() => {
       this.addTotal();
       this.Start();
-    }, this._timeToReachMidnight + 1000); // 1s after to be sure that the currentDay is the next day
+    }, Timing.TimeToReachMidnight + 1000); // 1s after to be sure that the currentDay is the next day
   }
 
   GenerateDay(dayIndex: number) {
@@ -79,7 +53,7 @@ export class ProbGeneratorService {
     };
     const realEnergy: EnergyType[] = ["kvarh", "kwh"];
 
-    for (let hour = 0; hour < this._unitPerDay; hour++) {
+    for (let hour = 0; hour < Timing.UnitPerDay; hour++) {
       realEnergy.map((energyType: EnergyType) => {
         const energyOut = out[energyType];
         const energyHourProb = dayProb[energyType][hour];
@@ -126,7 +100,7 @@ export class ProbGeneratorService {
     }
 
     // Calculate kVAh
-    for (let i = 0; i <= this._unitPerDay; i++) {
+    for (let i = 0; i <= Timing.UnitPerDay; i++) {
       out.kvah.push(Math.sqrt(Math.pow(out.kvarh[i], 2) + Math.pow(out.kwh[i], 2)));
     }
 
@@ -151,9 +125,9 @@ export class ProbGeneratorService {
       value: base
     };
     return values.map((value) => {
-      const y = value - lastComputed.value;
+      const y = (value + lastComputed.value) - lastComputed.value;
       lastComputed = {
-        slope: 1 / y,
+        slope: y,
         value: lastComputed.value + value
       };
       return lastComputed;
