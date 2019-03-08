@@ -1,7 +1,8 @@
 import * as BodyParder from "koa-bodyparser";
-import { Rakkit, MetadataStorage } from "rakkit";
-import { ProbGeneratorService, FetcherService } from "./services";
-import { nextThinkRequest } from "./constant";
+import { createConnection } from "typeorm";
+import { Rakkit } from "rakkit";
+import * as Path from "path";
+import { Timing } from "./class";
 
 export class Main {
   private static _instance: Main;
@@ -22,8 +23,22 @@ export class Main {
         `${__dirname}/routers/*Router.ts`
       ]
     });
-    MetadataStorage.getService(ProbGeneratorService).Start();
-    MetadataStorage.getService(FetcherService).Start(nextThinkRequest());
+    await createConnection({
+      username: "root",
+      password: "root",
+      database: "nirvana",
+      synchronize: true,
+      type: "mysql",
+      entities: [
+        this.getGlob("models/**", "Model")
+      ]
+    });
+    Timing.timer();
+  }
+
+  private static getGlob(pathEnd: string, cond: string) {
+    const path = Path.resolve(__dirname, pathEnd);
+    return `${path}/*${cond}.ts`;
   }
 }
 

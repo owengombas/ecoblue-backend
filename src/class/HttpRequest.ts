@@ -1,6 +1,6 @@
 import { Agent } from "https";
 import Axios from "axios";
-import { IFetcherParams } from "../../type";
+import { IFetcherParams } from "../type";
 
 export class HttpRequest {
   private _url: string;
@@ -59,7 +59,7 @@ export class HttpRequest {
     if (this._cookies) {
       return Array.from(this._cookies).reduce((prev: string, curr: string[], index: number) => {
         return `${prev}${index > 0 ? ";" : ""}${curr[0]}=${curr[1]}`;
-      },                                      "");
+      }, "");
     }
     return "";
   }

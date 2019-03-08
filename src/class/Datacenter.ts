@@ -1,4 +1,4 @@
-import { dataCenterDay, dataCenterHour } from "../../constant";
+import { dataCenterDay, dataCenterHour } from "../constant";
 import {
   IProb,
   IDatacenter,
@@ -6,7 +6,7 @@ import {
   IProbReccurence,
   ProbHourTable,
   ProbReccurenceTable
-} from "../../type";
+} from "../type";
 
 export class Datacenter {
   static get DatacenterHourFromDay(): IDatacenter[] {

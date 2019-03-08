@@ -1,3 +1,3 @@
-export * from "./Fetcher/HttpRequest";
-export * from "./Misc/Timing";
-export * from "./Prob/Datacenter";
+export * from "./HttpRequest";
+export * from "./Timing";
+export * from "./Datacenter";

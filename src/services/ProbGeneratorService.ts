@@ -3,42 +3,27 @@ import {
   IProbInfos,
   IProb,
   EnergyType,
-  IProbFunction,
-  IProbTotal,
-  IComputedProb,
-  IComputedFunction
+  IProbFunction
 } from "../type";
 import { probHour, probReccurence } from "../constant";
 import { Timing } from "../class";
+import { ProbElementModel, ProbModel } from "../models";
+import { Equal } from "typeorm";
 
 @Service()
 export class ProbGeneratorService {
   private readonly _reccurenceWeight = 1 / 50;
-  private _generatedToday: IProbFunction;
-  private _totalGenerated: IProbTotal;
+  private _generated: number[];
+  private _computed: ProbElementModel[];
+  private _totalGenerated: number;
 
-  get ComputedInfos(): IComputedProb {
-    return {
-      kvah: this.compute(this._totalGenerated.kvah, this._generatedToday.kvah),
-      kvarh: this.compute(this._totalGenerated.kvarh, this._generatedToday.kvarh),
-      kwh: this.compute(this._totalGenerated.kwh, this._generatedToday.kwh)
-    };
+  get Values() {
+    return this._computed.map((value) => value.Getable);
   }
 
   constructor() {
-    this._totalGenerated = {
-      kvah: 0,
-      kvarh: 0,
-      kwh: 0
-    };
-  }
-
-  Start() {
-    this._generatedToday = this.GenerateDay(Timing.CurrentDayIndex);
-    setTimeout(() => {
-      this.addTotal();
-      this.Start();
-    }, Timing.TimeToReachMidnight + 1000); // 1s after to be sure that the currentDay is the next day
+    this._totalGenerated = 0;
+    Timing.newDaySubject.subscribe(this.execute.bind(this));
   }
 
   GenerateDay(dayIndex: number) {
@@ -51,9 +36,9 @@ export class ProbGeneratorService {
       kwh: [],
       kvarh: []
     };
-    const realEnergy: EnergyType[] = ["kvarh", "kwh"];
+    const realEnergy: EnergyType[] = ["kwh"];
 
-    for (let hour = 0; hour < Timing.UnitPerDay; hour++) {
+    for (let hour = 0; hour < Timing.unitPerDay; hour++) {
       realEnergy.map((energyType: EnergyType) => {
         const energyOut = out[energyType];
         const energyHourProb = dayProb[energyType][hour];
@@ -100,36 +85,60 @@ export class ProbGeneratorService {
     }
 
     // Calculate kVAh
-    for (let i = 0; i <= Timing.UnitPerDay; i++) {
-      out.kvah.push(Math.sqrt(Math.pow(out.kvarh[i], 2) + Math.pow(out.kwh[i], 2)));
+    for (let i = 0; i <= Timing.unitPerDay; i++) {
+      out.kvah.push(
+        Math.sqrt(
+          Math.pow(out.kvarh[i], 2) + Math.pow(out.kwh[i], 2)
+        )
+      );
     }
 
     return out;
   }
 
-  private addTotal() {
-    return this._totalGenerated = {
-      kvah: this.sumEnergy(this._generatedToday.kvah),
-      kvarh: this.sumEnergy(this._generatedToday.kvarh),
-      kwh: this.sumEnergy(this._generatedToday.kwh)
-    };
+  private async execute() {
+    console.log("UPDATE");
+    const existingProb = await ProbModel.findOne({
+      where: {
+        Date: Timing.currentDayDate
+      }
+    });
+    if (!existingProb) {
+      this._generated = this.GenerateDay(Timing.currentDayIndex).kwh;
+      this._computed = this.compute(this._totalGenerated, this._generated);
+      this._totalGenerated = this.sumEnergy(this._generated);
+      const prob = new ProbModel();
+      prob.Values = this._computed.map((value) => {
+        value.Prob = prob;
+        return value;
+      });
+      await prob.save();
+    } else {
+      this._generated = [];
+      this._computed = (existingProb.Values as ProbElementModel[]);
+      this._totalGenerated = existingProb.Values[existingProb.Values.length - 1].Value;
+    }
   }
 
   private sumEnergy(values: number[]) {
-    return values.reduce((total, value) => total + value, 0);
+    return values.reduce((total, value) => {
+      return total + value;
+    }, 0);
   }
 
-  private compute(base: number, values: number[]): IComputedFunction[] {
-    let lastComputed: IComputedFunction = {
-      slope: 0,
-      value: base
-    };
-    return values.map((value) => {
-      const y = (value + lastComputed.value) - lastComputed.value;
-      lastComputed = {
-        slope: y,
-        value: lastComputed.value + value
-      };
+  private compute(base: number, values: number[]): ProbElementModel[] {
+    let lastComputed = new ProbElementModel(0, 0, base);
+    return values.map((value, index) => {
+      // y = ax + b
+      const newValue = value + lastComputed.Value;
+      const nextElement = values[index + 1];
+      const nextValue = nextElement ? (nextElement + newValue) : newValue;
+      const y = (nextValue - newValue) / (Timing.range * 60);
+      lastComputed = new ProbElementModel(
+        index,
+        y,
+        newValue
+      );
       return lastComputed;
     });
   }

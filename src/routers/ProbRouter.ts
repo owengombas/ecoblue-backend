@@ -8,6 +8,6 @@ export class ProbRouter {
 
   @Get("/")
   get(context: Context) {
-    context.body = this._probGeneratorService.ComputedInfos;
+    context.body = this._probGeneratorService.Values;
   }
 }
