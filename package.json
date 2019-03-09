@@ -9,9 +9,10 @@
   "author": "Owen Calvin, David Darmanger, Dany Oliviera Da Costa, Malo Romano",
   "license": "MIT",
   "dependencies": {
-    "@koa/cors": "^2.2.3",
+    "@types/koa2-cors": "^2.0.1",
     "axios": "^0.18.0",
     "koa-bodyparser": "^4.2.1",
+    "koa2-cors": "^2.0.6",
     "mysql": "^2.16.0",
     "rakkit": "^0.1.11",
     "rxjs": "^6.3.3",
@@ -20,7 +21,6 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/koa-bodyparser": "^4.2.2",
-    "@types/koa__cors": "^2.2.3",
     "@types/node": "^10.12.18",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^7.0.1",

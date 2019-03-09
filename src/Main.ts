@@ -4,7 +4,7 @@ import { Rakkit } from "rakkit";
 import * as Path from "path";
 import { Timing } from "./class";
 import { questions } from "./constant";
-import * as Cors from "@koa/cors";
+import * as Cors from "koa2-cors";
 
 export class Main {
   private static _instance: Main;
@@ -24,7 +24,9 @@ export class Main {
   private async start() {
     await Rakkit.start({
       globalRestMiddlewares: [
-        Cors(),
+        Cors({
+          origin: "*"
+        }),
         BodyParder()
       ],
       routers: [
