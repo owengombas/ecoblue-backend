@@ -7,9 +7,9 @@ export class Timing {
   static readonly newDaySubject: Subject<number> = new Subject();
 
   static timer() {
-    // if (this.currentTimeRangeIndex === 0) {
+    if (this.currentTimeRangeIndex === 0) {
       this.newDaySubject.next(this.currentDayIndex);
-    // }
+    }
     this.tickSubject.next(this.currentTimeRangeIndex);
     console.log(Timing.convertToMinutes(Timing.nextTimeRange));
     setTimeout(this.timer.bind(this), Timing.nextTimeRange);
