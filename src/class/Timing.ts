@@ -5,12 +5,14 @@ export class Timing {
   static readonly unitPerDay = 24 * 60 / Timing.range;
   static readonly tickSubject: Subject<number> = new Subject();
   static readonly newDaySubject: Subject<number> = new Subject();
+  private static firstTick = true;
 
   static timer() {
-    if (this.currentTimeRangeIndex === 0) {
+    if (this.currentTimeRangeIndex === 0 || this.firstTick) {
       this.newDaySubject.next(this.currentDayIndex);
     }
     this.tickSubject.next(this.currentTimeRangeIndex);
+    this.firstTick = false;
     setTimeout(this.timer.bind(this), Timing.nextTimeRange);
   }
 
