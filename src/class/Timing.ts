@@ -11,7 +11,6 @@ export class Timing {
       this.newDaySubject.next(this.currentDayIndex);
     }
     this.tickSubject.next(this.currentTimeRangeIndex);
-    console.log(Timing.convertToMinutes(Timing.nextTimeRange));
     setTimeout(this.timer.bind(this), Timing.nextTimeRange);
   }
 
