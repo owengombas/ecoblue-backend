@@ -1,10 +1,9 @@
 import * as BodyParder from "koa-bodyparser";
 import { createConnection } from "typeorm";
-import { Rakkit, MetadataStorage } from "rakkit";
+import { Rakkit } from "rakkit";
 import * as Path from "path";
 import { Timing } from "./class";
 import { questions } from "./constant";
-import { ProbGeneratorService } from "./services";
 
 export class Main {
   private static _instance: Main;
