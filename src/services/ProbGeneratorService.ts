@@ -19,10 +19,13 @@ export class ProbGeneratorService {
   private _totalGenerated?: number;
 
   get Values() {
-    return [
-      this._prevLastElement.Getable,
-      ...this._computed.map((value) => value.Getable)
-    ];
+    if (this._computed) {
+      return [
+        this._prevLastElement.Getable,
+        ...this._computed.map((value) => value.Getable)
+      ];
+    }
+    return [];
   }
 
   constructor() {
