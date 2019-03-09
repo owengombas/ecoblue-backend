@@ -1,10 +1,11 @@
 import * as BodyParder from "koa-bodyparser";
 import { createConnection } from "typeorm";
-import { Rakkit } from "rakkit";
+import { Rakkit, MetadataStorage } from "rakkit";
 import * as Path from "path";
 import { Timing } from "./class";
 import { questions } from "./constant";
 import * as Cors from "koa2-cors";
+import { OptionsMiddleware } from "./middlewares";
 
 export class Main {
   private static _instance: Main;
@@ -33,6 +34,10 @@ export class Main {
         this.getGlob("routers/**", "Router")
       ]
     });
+    Rakkit.Instance.KoaApp.use(
+      MetadataStorage.getService(OptionsMiddleware).use
+    );
+
     await createConnection({
       username: "root",
       password: "root",
