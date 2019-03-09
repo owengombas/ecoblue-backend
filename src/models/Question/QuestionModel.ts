@@ -13,13 +13,24 @@ import { IGetableQuestion } from "../../type";
 export class QuestionModel extends Model {
   private _answers: AnswerModel[];
   private _question: string;
+  private _explanation: string;
 
   get Getable(): IGetableQuestion {
     return {
       id: this.Id,
       question: this._question,
+      explanation: this._explanation,
       answers: this._answers.map((answer) => answer.Getable)
     };
+  }
+
+  constructor(
+    question: string,
+    explanation: string
+  ) {
+    super();
+    this.Question = question;
+    this.Explanation = explanation;
   }
 
   @OneToMany(
@@ -40,5 +51,13 @@ export class QuestionModel extends Model {
   }
   set Question(question) {
     this._question = question;
+  }
+
+  @Column()
+  get Explanation(): string {
+    return this._explanation;
+  }
+  set Explanation(explanation) {
+    this._explanation = explanation;
   }
 }

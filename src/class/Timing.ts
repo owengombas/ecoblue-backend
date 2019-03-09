@@ -32,13 +32,19 @@ export class Timing {
     return (new Date()).getDay();
   }
 
-  static get currentDayDate() {
+  static get today() {
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
     today.setSeconds(0);
     today.setMilliseconds(0);
     return today;
+  }
+
+  static get yesterday() {
+    const yesterday = this.today;
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday;
   }
 
   static get timeToReachMidnight() {

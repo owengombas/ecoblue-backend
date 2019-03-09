@@ -8,29 +8,34 @@ import {
 import { probHour, probReccurence } from "../constant";
 import { Timing } from "../class";
 import { ProbElementModel, ProbModel } from "../models";
-import { Equal } from "typeorm";
+import { LessThan } from "typeorm";
 
 @Service()
 export class ProbGeneratorService {
   private readonly _reccurenceWeight = 1 / 50;
   private _generated: number[];
+  private _prevLastElement: ProbElementModel;
   private _computed: ProbElementModel[];
-  private _totalGenerated: number;
+  private _totalGenerated?: number;
 
   get Values() {
-    return this._computed.map((value) => value.Getable);
+    return [
+      this._prevLastElement.Getable,
+      ...this._computed.map((value) => value.Getable)
+    ];
   }
 
   constructor() {
-    this._totalGenerated = 0;
+    this._prevLastElement = new ProbElementModel(Timing.unitPerDay - 1, 0, 0);
     Timing.newDaySubject.subscribe(this.execute.bind(this));
   }
 
   GenerateDay(dayIndex: number) {
     let correctedDayIndex = Math.abs(dayIndex);
-    const weekNumber = Math.floor(correctedDayIndex / 7);
+    const rawWeekNumber = correctedDayIndex / 7;
+    const weekNumber = Number.isInteger(rawWeekNumber) ? rawWeekNumber - 1 : Math.floor(rawWeekNumber);
     correctedDayIndex = (correctedDayIndex - weekNumber * 7) - 1;
-    const dayProb = probHour[dayIndex];
+    const dayProb = probHour[correctedDayIndex];
     const out: IProbFunction = {
       kvah: [],
       kwh: [],
@@ -97,15 +102,31 @@ export class ProbGeneratorService {
   }
 
   private async execute() {
-    console.log("UPDATE");
     const existingProb = await ProbModel.findOne({
       where: {
-        Date: Timing.currentDayDate
+        Date: Timing.today
       }
     });
+    if (this._totalGenerated === undefined) {
+      const previousProb = await ProbModel.findOne({
+        where: {
+          Date: LessThan(Timing.today)
+        },
+        order: {
+          Date: -1
+        }
+      });
+      if (previousProb) {
+        this._totalGenerated = previousProb.Values[previousProb.Values.length - 1].Value;
+        this._prevLastElement = this.last(previousProb.Values);
+      } else {
+        this._totalGenerated = 0;
+      }
+    }
     if (!existingProb) {
+      console.log(Timing.currentDayIndex);
       this._generated = this.GenerateDay(Timing.currentDayIndex).kwh;
-      this._computed = this.compute(this._totalGenerated, this._generated);
+      this._computed = this.compute(this._generated, this._totalGenerated);
       this._totalGenerated = this.sumEnergy(this._generated);
       const prob = new ProbModel();
       prob.Values = this._computed.map((value) => {
@@ -116,8 +137,13 @@ export class ProbGeneratorService {
     } else {
       this._generated = [];
       this._computed = (existingProb.Values as ProbElementModel[]);
-      this._totalGenerated = existingProb.Values[existingProb.Values.length - 1].Value;
+      this._totalGenerated = this.last(existingProb.Values).Value;
     }
+    this._prevLastElement.Slope = this.computeSlope(
+      this._prevLastElement.Value,
+      this._computed[0].Value
+    );
+    await this._prevLastElement.save();
   }
 
   private sumEnergy(values: number[]) {
@@ -126,14 +152,14 @@ export class ProbGeneratorService {
     }, 0);
   }
 
-  private compute(base: number, values: number[]): ProbElementModel[] {
+  private compute(values: number[], base: number): ProbElementModel[] {
     let lastComputed = new ProbElementModel(0, 0, base);
     return values.map((value, index) => {
       // y = ax + b
       const newValue = value + lastComputed.Value;
       const nextElement = values[index + 1];
       const nextValue = nextElement ? (nextElement + newValue) : newValue;
-      const y = (nextValue - newValue) / (Timing.range * 60);
+      const y = this.computeSlope(newValue, nextValue);
       lastComputed = new ProbElementModel(
         index,
         y,
@@ -141,5 +167,13 @@ export class ProbGeneratorService {
       );
       return lastComputed;
     });
+  }
+
+  private computeSlope(value: number, nextValue: number) {
+    return nextValue - value;
+  }
+
+  private last<ArrayType>(arr: ArrayLike<ArrayType>) {
+    return arr[arr.length - 1];
   }
 }

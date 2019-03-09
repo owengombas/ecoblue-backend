@@ -26,6 +26,13 @@ export class AnswerModel extends Model {
     };
   }
 
+  constructor(text: string, good: boolean = false) {
+    super();
+    this.Text = text;
+    this.Good = good;
+    this.Votes = 0;
+  }
+
   @Column()
   get Text(): string {
     return this._text;

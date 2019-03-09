@@ -4,3 +4,5 @@ export * from "./Prob/DatacenterDay";
 export * from "./Prob/DatacenterHour";
 export * from "./Prob/ProbHour";
 export * from "./Prob/ProbReccurence";
+
+export * from "./Question/questions";

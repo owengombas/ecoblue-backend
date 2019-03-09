@@ -1,4 +1,4 @@
-export * from "./Fetcher/FetcherModel";
+export * from "./Fetcher/FetcherModelDeprecated";
 
 export * from "./Prob/ProbModel";
 export * from "./Prob/ProbElementModel";

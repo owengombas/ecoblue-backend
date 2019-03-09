@@ -2,6 +2,7 @@ export * from "./Fetcher/IFetcherParams";
 
 export * from "./Question/IGetableAnswer";
 export * from "./Question/IGetableQuestion";
+export * from "./Question/IInitQuestion";
 
 export * from "./Prob/EnergyType";
 export * from "./Prob/IDatacenter";

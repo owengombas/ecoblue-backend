@@ -13,7 +13,7 @@ export class ProbModel extends Model {
 
   constructor() {
     super();
-    this._date = Timing.currentDayDate;
+    this._date = Timing.today;
   }
 
   get Getable(): IGetableProb {
