@@ -26,7 +26,7 @@ export class Main {
         BodyParder()
       ],
       routers: [
-        `${__dirname}/routers/*Router.ts`
+        this.getGlob("routers/**", "Router")
       ]
     });
     await createConnection({
@@ -55,7 +55,7 @@ export class Main {
 
   private getGlob(pathEnd: string, cond: string) {
     const path = Path.resolve(__dirname, pathEnd);
-    return `${path}/*${cond}.ts`;
+    return `${path}/*${cond}.{js,ts}`;
   }
 }
 
