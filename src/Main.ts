@@ -25,26 +25,21 @@ export class Main {
   private async start() {
     await Rakkit.start({
       globalRestMiddlewares: [
+	Cors(),
         BodyParder()
       ],
       routers: [
         this.getGlob("routers/**", "Router")
       ]
     });
+    Rakkit.Instance.KoaApp.use(Cors());
     Rakkit.Instance.KoaApp.use(
       MetadataStorage.getService(OptionsMiddleware).use
-    );
-    Rakkit.Instance.KoaApp.use(
-      Cors({
-        origin: "*",
-        allowHeaders: "*",
-        allowMethods: "*"
-      })
     );
 
     await createConnection({
       username: "root",
-      password: "root",
+      password: "MelekMarteau593+",
       database: "nirvana",
       synchronize: true,
       type: "mysql",
