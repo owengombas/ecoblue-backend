@@ -1,11 +1,11 @@
 import * as BodyParder from "koa-bodyparser";
 import { createConnection } from "typeorm";
+import * as Cors from "@koa/cors";
 import { Rakkit, MetadataStorage } from "rakkit";
 import * as Path from "path";
-import { Timing } from "./class";
-import { questions } from "./constant";
-import * as Cors from "koa2-cors";
 import { OptionsMiddleware } from "./middlewares";
+import { questions } from "./constant";
+import { Timing } from "./class";
 
 export class Main {
   private static _instance: Main;
@@ -25,9 +25,6 @@ export class Main {
   private async start() {
     await Rakkit.start({
       globalRestMiddlewares: [
-        Cors({
-          origin: "*"
-        }),
         BodyParder()
       ],
       routers: [
@@ -36,6 +33,13 @@ export class Main {
     });
     Rakkit.Instance.KoaApp.use(
       MetadataStorage.getService(OptionsMiddleware).use
+    );
+    Rakkit.Instance.KoaApp.use(
+      Cors({
+        origin: "*",
+        allowHeaders: "*",
+        allowMethods: "*"
+      })
     );
 
     await createConnection({
