@@ -1,11 +1,12 @@
 import * as BodyParder from "koa-bodyparser";
 import { createConnection } from "typeorm";
 import * as Cors from "@koa/cors";
-import { Rakkit, MetadataStorage } from "rakkit";
+import { Rakkit } from "rakkit";
 import * as Path from "path";
 import { OptionsMiddleware } from "./middlewares";
 import { questions } from "./constant";
 import { Timing } from "./class";
+import { QuestionModel } from "./models";
 
 export class Main {
   private static _instance: Main;
@@ -47,6 +48,7 @@ export class Main {
       ]
     });
     if (this.initQuestions) {
+      await QuestionModel.clear();
       await Promise.all(
         questions.map(async (question) => {
           question.question.Answers = question.answers.map((answer) => {
