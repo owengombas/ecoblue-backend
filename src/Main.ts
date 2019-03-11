@@ -6,7 +6,7 @@ import * as Path from "path";
 import { OptionsMiddleware } from "./middlewares";
 import { questions } from "./constant";
 import { Timing } from "./class";
-import { QuestionModel } from "./models";
+import { QuestionModel, AnswerModel } from "./models";
 
 export class Main {
   private static _instance: Main;
@@ -48,6 +48,7 @@ export class Main {
       ]
     });
     if (this.initQuestions) {
+      await AnswerModel.clear();
       await QuestionModel.clear();
       await Promise.all(
         questions.map(async (question) => {
