@@ -48,8 +48,6 @@ export class Main {
       ]
     });
     if (this.initQuestions) {
-      await AnswerModel.clear();
-      await QuestionModel.clear();
       await Promise.all(
         questions.map(async (question) => {
           question.question.Answers = question.answers.map((answer) => {
