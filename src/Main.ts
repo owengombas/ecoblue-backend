@@ -24,24 +24,23 @@ export class Main {
 
   private async start() {
     await Rakkit.start({
+      appMiddlewares: [
+        Cors(),
+        OptionsMiddleware
+      ],
       globalRestMiddlewares: [
-	Cors(),
         BodyParder()
       ],
       routers: [
         this.getGlob("routers/**", "Router")
       ]
     });
-    Rakkit.Instance.KoaApp.use(Cors());
-    Rakkit.Instance.KoaApp.use(
-      MetadataStorage.getService(OptionsMiddleware).use
-    );
 
     await createConnection({
       username: "root",
       password: "MelekMarteau593+",
       database: "nirvana",
-      synchronize: true,
+      synchronize: false,
       type: "mysql",
       entities: [
         this.getGlob("models/**", "Model")
