@@ -53,7 +53,9 @@ export class QuestionModel extends Model {
     this._question = question;
   }
 
-  @Column()
+  @Column({
+    type: "text"
+  })
   get Explanation(): string {
     return this._explanation;
   }
