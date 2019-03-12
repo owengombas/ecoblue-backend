@@ -15,12 +15,12 @@ export const questions: IInitQuestion[] = [{
   }, {
     question: new QuestionModel(
       "Lorsque je souhaite aller sur un site internet que je visite fréquemment",
-      ""
+      "Les réponses 1 et 3 sont similaires. Dans les deux cas on privilégie le chemin le plus court pour éviter de créer du trafic et de faire travailler les « data centers »."
     ),
     answers: [
+      new AnswerModel("Je crée un favoris sur mon navigateur, puis l'utilise pour aller sur le site", true),
       new AnswerModel("Je recherche le nom du site sur Google"),
-      new AnswerModel("Je créé un favoris sur mon navigateur, puis je l'utiliser pour aller sur le site", true),
-      new AnswerModel("J'écris le lien complet du site sur lequel je souhaite me rendre")
+      new AnswerModel("J'écris le lien complet du site sur lequel je souhaite me rendre", true)
     ]
   }, {
     question: new QuestionModel(
@@ -34,8 +34,8 @@ export const questions: IInitQuestion[] = [{
     ]
   }, {
     question: new QuestionModel(
-      "Quel pourcentage de mails ne sont jamais ouvert",
-      "Pour réduire ce nombre, on peut éviter par exemple de s'inscrire à des newsletters, ou plus simple en n'envoyant pas de mails inutiles"
+      "Selon vous, quel est le pourcentage de mails jamais ouverts",
+      "Pour réduire ce nombre, on peut éviter par exemple de s'inscrire à des newsletters ou de ne pas envoyer de mails inutiles"
     ),
     answers: [
       new AnswerModel("25%"),
@@ -45,12 +45,22 @@ export const questions: IInitQuestion[] = [{
   }, {
     question: new QuestionModel(
       "Qu'elle la meilleure façon de moins impacter l'environement lorsque que je doit archiver de vieux documents de mon ordinateur",
-      ""
+      "Les clouds, sont des machines physiques délocalisées et allumées en permanences afin de rendre les informations disponible à n'importe quel moment. L'impression, quant à elle, est une des causes de la déforestation, l'usage de l'encre a également un impacte sur l'environnement. Il est donc préférable d'utiliser une clé USB dans ce cas"
     ),
     answers: [
       new AnswerModel("Les mettre sur une clé USB", true),
       new AnswerModel("Les mettre sur un Cloud"),
       new AnswerModel("Les imprimer")
+    ]
+  }, {
+    question: new QuestionModel(
+      "Lorsque j'ai lu un mail, que je ne rouvrirais probablement pas",
+      "Le simple fait de garder des mails dans sa boîte de réception demande de l'électricité pour être conservé et donc pollue. Une fois qu’un mail est lu il serait préférable de le supprimer"
+    ),
+    answers: [
+      new AnswerModel("Je le laisse dans ma boîte mail"),
+      new AnswerModel("J'archive le mail, cela suffit"),
+      new AnswerModel("Je supprime le mail", true)
     ]
   }
 ];
