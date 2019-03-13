@@ -6,7 +6,6 @@ import * as Path from "path";
 import { OptionsMiddleware } from "./middlewares";
 import { questions } from "./constant";
 import { Timing } from "./class";
-import { QuestionModel, AnswerModel } from "./models";
 
 export class Main {
   private static _instance: Main;

@@ -64,11 +64,11 @@ export const questions: IInitQuestion[] = [{
     ]
   }, {
     question: new QuestionModel(
-      "Selon vous, quelle est la meilleure façon de communiquer avec un quelqu'un en polluant un minimum :",
-      "Les SMS étant transportés par la technologie téléphonique rejettent moins de CO<sub>2</sub>. Contrairement aux mails et aux messageries en ligne qui utilisent internet, ce qui implique d'utiliser bien plus de ressources pour transporter et stocker la données à long terme."
+      "Selon vous, quelle est la meilleure façon de communiquer avec quelqu'un en polluant un minimum :",
+      "Les SMS étant transportés par la technologie téléphonique, ils rejettent moins de CO<sub>2</sub>. Contrairement aux mails et aux messageries en ligne qui utilisent internet, ils ont besoin de bien plus de ressources pour transporter et stocker la donnée à long terme."
     ),
     answers: [
-      new AnswerModel("Lui envoyer un message avec service de messagerie (Messenger, WhatsApp, ...)"),
+      new AnswerModel("Lui envoyer un message avec un service de messagerie (Messenger, WhatsApp, ...)"),
       new AnswerModel("Lui envoyer un SMS", true),
       new AnswerModel("Lui envoyer un mail")
     ]
