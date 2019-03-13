@@ -48,15 +48,13 @@ export class Main {
       ]
     });
     if (this.initQuestions) {
-      await Promise.all(
-        questions.map(async (question) => {
-          question.question.Answers = question.answers.map((answer) => {
-            answer.Question = question.question;
-            return answer;
-          });
-          return await question.question.save();
-        })
-      );
+      for (const question of questions) {
+        question.question.Answers = question.answers.map((answer) => {
+          answer.Question = question.question;
+          return answer;
+        });
+        await question.question.save();
+      }
     }
     Timing.timer();
   }
