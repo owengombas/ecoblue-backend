@@ -78,8 +78,8 @@ export const questions: IInitQuestion[] = [{
       ""
     ),
     answers: [
-      new AnswerModel("Oui, complétement", true),
-      new AnswerModel("En partie, pas complétement", true),
+      new AnswerModel("Oui, complètement", true),
+      new AnswerModel("En partie, pas complètement", true),
       new AnswerModel("Non, pas du tout", true)
     ]
   }
