@@ -62,5 +62,25 @@ export const questions: IInitQuestion[] = [{
       new AnswerModel("J'archive le mail, cela suffit"),
       new AnswerModel("Je supprime le mail", true)
     ]
+  }, {
+    question: new QuestionModel(
+      "Selon vous, quelle est la meilleure façon de communiquer avec un quelqu'un en polluant un minimum :",
+      "Les SMS étant transportés par la technologie téléphonique rejettent moins de CO<sub>2</sub>. Contrairement aux mails et aux messageries en ligne qui utilisent internet, ce qui implique d'utiliser bien plus de ressources pour transporter et stocker la données à long terme."
+    ),
+    answers: [
+      new AnswerModel("Lui envoyer un message avec service de messagerie (Messenger, WhatsApp, ...)"),
+      new AnswerModel("Lui envoyer un SMS", true),
+      new AnswerModel("Lui envoyer un mail")
+    ]
+  }, {
+    question: new QuestionModel(
+      "Après avoir visité ce site, pensez-vous remanier vos habitudes afin de moins polluer ?",
+      ""
+    ),
+    answers: [
+      new AnswerModel("Oui, complétement", true),
+      new AnswerModel("En partie, pas complétement", true),
+      new AnswerModel("Non, pas du tout", true)
+    ]
   }
 ];
