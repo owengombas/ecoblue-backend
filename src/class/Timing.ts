@@ -9,7 +9,9 @@ export class Timing {
 
   static timer() {
     if (this.currentTimeRangeIndex === 0 || this.firstTick) {
-      this.newDaySubject.next(this.currentDayIndex);
+      setTimeout(() => {
+        this.newDaySubject.next(this.currentDayIndex);
+      }, 30000);
     }
     this.tickSubject.next(this.currentTimeRangeIndex);
     this.firstTick = false;
